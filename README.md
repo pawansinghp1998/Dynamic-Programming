@@ -175,3 +175,28 @@ A perfect square is an integer that is the square of an integer; in other words,
         return min;
     }
 }
+
+Q.6(62)A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+
+How many possible unique paths are there?
+
+ class Solution {
+    public int uniquePaths(int m, int n) {
+        int dp[][]=new int[m][n];
+        for(int i=0;i<n;i++)
+            dp[m-1][i]=1;                              //There is only one way to reach to the finishing point from last row
+        for(int j=0;j<m;j++)
+            dp[j][n-1]=1;                               //There is only one way to reach to the finishing point from last column
+        for(int k=m-2;k>=0;k--)
+        {
+            for(int l=n-2;l>=0;l--)
+            {
+                dp[k][l]=dp[k][l+1]+dp[k+1][l];         //Using bottom to up approach to fill the dp array
+            }
+        }
+        return dp[0][0];
+        
+    }
+}
