@@ -200,3 +200,69 @@ How many possible unique paths are there?
         
     }
 }
+
+
+Q.7(63)A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+
+Now consider if some obstacles are added to the grids. How many unique paths would there be?
+
+An obstacle and space is marked as 1 and 0 respectively in the grid.
+
+class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        
+        int m=obstacleGrid.length; int c=-1;int d=-1;
+        int n=obstacleGrid[0].length;
+        int dp[][]=new int[m][n]; 
+        if(obstacleGrid[m-1][n-1]==1)
+            return 0;                             //if finshing point have block then we can not reach at that point
+        
+        for(int i=n-1;i>=0;i--)
+        {
+            if(obstacleGrid[m-1][i]==1)
+            {
+                c=i;                            //Storing the index value of first index in last row from finishing point where blocks are present
+                break;
+            }
+        }
+        for(int j=m-1;j>=0;j--)
+        {
+            if(obstacleGrid[j][n-1]==1)
+            {
+                d=j;                            //Storing the first index in last column from finishing point where block is present
+                break;
+            }
+        }
+        for(int i=0;i<=c;i++)
+        {
+            dp[m-1][i]=0;                       //Storing value 0 in all index of last row till index c because if block is present at index c we can not move through that index
+        }
+        for(int i=c+1;i<n;i++)
+        {
+            dp[m-1][i]=1;                    //Storing value 1 after index c till finishing point
+        }
+        for(int j=0;j<=d;j++)
+        {
+            dp[j][n-1]=0;                 //Same approach as that we have used in last row
+        }
+        for(int j=d+1;j<m;j++)
+        {
+            dp[j][n-1]=1;
+        }
+        
+        
+        for(int k=m-2;k>=0;k--)
+        {
+            for(int l=n-2;l>=0;l--)
+            {
+                if(obstacleGrid[k][l]==1)
+                    dp[k][l]=0;                        //If block is present filling that index with zero
+                else
+                    dp[k][l]=dp[k+1][l]+dp[k][l+1];       // using bottom to up concept to fill index of dp array
+            }
+        }
+        return dp[0][0];                        
+    }
+}
