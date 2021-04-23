@@ -1,4 +1,4 @@
-Q.1. You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+Q.1.(322) You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
 
 Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
 
@@ -112,7 +112,7 @@ class Solution {
                        return str;
     }}
     
-    Q.4Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+    Q.4.(42)Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
 
  class Solution {
     public int trap(int[] height) {
