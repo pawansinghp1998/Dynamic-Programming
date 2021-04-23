@@ -135,3 +135,43 @@ class Solution {
 		    return sum;
     }
 }
+
+Q.5(279).Given an integer n, return the least number of perfect square numbers that sum to n.
+
+A perfect square is an integer that is the square of an integer; in other words, it is the product of some integer with itself. For example, 1, 4, 9, and 16 are perfect squares while 3 and 11 are not.
+
+ class Solution {
+    public int numSquares(int n) {
+        int sq=1;int a=1;int c=0;int min=n;
+		int arr[]=new int [n];
+		while(sq<=n)
+		{
+		arr[c]=sq;                               //Storing all possible square upto limit n
+		a=a+1;
+		sq=a*a;
+		c++;
+		}
+        
+        int dp[][]=new int[c][n+1];
+        for(int i=0;i<c;i++)                              //Using the same algorith as min number of coin require to achieve particular target
+            dp[i][0]=0;
+        for(int i=1;i<=n;i++)
+            dp[0][i]=i;
+        for(int j=1;j<c;j++)
+        {
+            for(int k=1;k<=n;k++)
+            {
+               if(k>=arr[j])
+                   dp[j][k]=Math.min(dp[j-1][k] ,1+dp[j][k-arr[j]]);
+               else
+                   dp[j][k]=dp[j-1][k];
+            }
+        }
+        for(int i=0;i<c;i++)
+        {
+            if(dp[i][n]<min)
+                min=dp[i][n];
+        }
+        return min;
+    }
+}
