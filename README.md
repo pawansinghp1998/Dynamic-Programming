@@ -289,3 +289,41 @@ Given an integer array nums representing the amount of money of each house, retu
        return dp[nums.length-1];
     }
 }
+
+Q.9.(91).A message containing letters from A-Z can be encoded into numbers using the following mapping:
+
+'A' -> "1"
+'B' -> "2"
+...
+'Z' -> "26"
+To decode an encoded message, all the digits must be grouped then mapped back into letters using the reverse of the mapping above (there may be multiple ways). For example, "11106" can be mapped into:
+
+"AAJF" with the grouping (1 1 10 6)
+"KJF" with the grouping (11 10 6)
+Note that the grouping (1 11 06) is invalid because "06" cannot be mapped into 'F' since "6" is different from "06".
+
+Given a string s containing only digits, return the number of ways to decode it.
+
+The answer is guaranteed to fit in a 32-bit integer.
+
+
+class Solution {
+    public int numDecodings(String s)
+    {
+      return helper(s,0);
+    }
+    
+     Map <Integer, Integer> map= new HashMap();           //map data structure is used to find whether for particular value of i(for which calculation is already done)                private int helper(String s,int i)                       combination is possible or not
+    {int ways=0;
+        if(i>=s.length())                              //thses are two base cases if character arindex i ios zero this combination is not possible and if i reaches length or              return 1;                                        become greater than that this combination is possible
+        if(s.charAt(i)=='0')
+            return 0;
+        if(map.containsKey(i))
+        return map.get(i);
+        ways+=helper(s,i+1);
+            if(i+2<=s.length() && Integer.parseInt(s.substring(i,i+2))<=26)
+                ways+=helper(s,i+2);
+        map.put(i ,ways);
+        return ways;
+    }
+}
