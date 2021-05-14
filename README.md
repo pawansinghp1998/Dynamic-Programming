@@ -21,7 +21,7 @@ class Solution {
         
         for(int j = 1; j< dp[0].length; ++j){
             if(j % coins[0] == 0){
-                dp[1][j] = j/coins[0];                                                    //Initializing the colum with no of coins needed of particular
+                dp[1][j] = j/coins[0];                                                    //Initializing the row with no of coins needed of particular
             }else{
                 dp[1][j] = Integer.MAX_VALUE -1;
             }
